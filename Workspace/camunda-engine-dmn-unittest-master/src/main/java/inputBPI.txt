@@ -1,0 +1,22 @@
+Path to event log (.csv):"G:\\Meine Ablage\\Master Arbeit\\DMN CC\\dmn-cc\\Workspace\\camunda-engine-dmn-unittest-master\\src\\main\\java\\EventLogs\\RequestForPaymentCSV.csv"
+Seperator in event log:","
+Column of the casename (starting with 0):6
+Column of the eventname (starting with 0):3
+Column of the eventtimestamp (starting with 0):4
+SimpleDateFormat of the Timestamp:"yyyy-MM-dd HH:mm:ssX"
+Constraints you want to check (Put in Declare Templates with events): 
+"Absence2,Request For Payment APPROVED by ADMINISTRATION"
+"Absence2,Request For Payment APPROVED by BUDGET OWNER"
+"Absence2,Request For Payment REJECTED by ADMINISTRATION"
+"AlternatePrecedence,Request For Payment SUBMITTED by EMPLOYEE,Payment Handled"
+"AlternatePrecedence,Request For Payment SUBMITTED by EMPLOYEE,Request For Payment FINAL_APPROVED by SUPERVISOR"
+"AlternatePrecedence,Request For Payment SUBMITTED by EMPLOYEE,Request Payment"
+"AlternateSuccession,Request For Payment FINAL_APPROVED by SUPERVISOR,Payment Handled"
+"ChainSuccession,Request For Payment FINAL_APPROVED by SUPERVISOR,Request Payment"
+"ChainSuccession,Request Payment,Payment Handled"
+"Exactly1,Payment Handled"
+"Exactly1,Request For Payment FINAL_APPROVED by SUPERVISOR"
+"Exactly1,Request For Payment SUBMITTED by EMPLOYEE"
+"Exactly1,Request Payment"
+"Init,Request For Payment SUBMITTED by EMPLOYEE"
+"Succession,Request For Payment SUBMITTED by EMPLOYEE,Request For Payment FINAL_APPROVED by SUPERVISOR"

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_0pka7st" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.13.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <decision id="conformanceDecision" name="Conformance Decision">
+    <informationRequirement id="InformationRequirement_1st6vji">
+      <requiredInput href="#event1" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_124elfi">
+      <requiredInput href="#event2" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1dp0nuh">
+      <requiredInput href="#InputData_1eh77w5" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1gs3iso">
+      <requiredInput href="#InputData_15w7wno" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_050htd6">
+      <input id="InputClause_0ftveh3" label="Constraint Name">
+        <inputExpression id="LiteralExpression_0qbatv6" typeRef="string">
+          <text>constraint</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_06ez53d" label="Conformance" name="conformance" typeRef="boolean" biodi:width="385" />
+      <rule id="DecisionRule_0s7hu6o">
+        <inputEntry id="UnaryTests_0isgxnv">
+          <text>"Participation"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1991oem">
+          <text>some event in eventlist satisfies event[1]=event1</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1sgjejw">
+        <inputEntry id="UnaryTests_1lpmjzy">
+          <text>"AtMostOne"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0hnghn1">
+          <text>(count(eventlist[item[1]=event1]) &gt;= 2) = false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_098uidp">
+        <inputEntry id="UnaryTests_0aozhmq">
+          <text>"Init"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1vr9is0">
+          <text>((eventlist[1])[1] = event1) = true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ff778n">
+        <inputEntry id="UnaryTests_1uu0v3b">
+          <text>"End"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1k0udvy">
+          <text>((eventlist[-1])[1] = event1) = true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1eolg8g">
+        <inputEntry id="UnaryTests_1exilx0">
+          <text>"RespondedExistence"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ojtrh3">
+          <text>((not(some event in eventlist satisfies event[1]=event1)) or ((some event in eventlist satisfies event[1]=event1) and (some event in eventlist satisfies event[1]=event2)))</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1vlea21">
+        <inputEntry id="UnaryTests_014t8t5">
+          <text>"Response"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_166gvm0">
+          <text>((not(some event in eventlist satisfies event[1]=event1)) or ((some event in eventlist satisfies event[1]=event2) and (every x in eventlist[item[1]=event1] satisfies (some y in eventlist[item[1]=event2] satisfies after(y[2],x[2])))))</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1pserke">
+        <inputEntry id="UnaryTests_0b93z0a">
+          <text>"AlternateResponse"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1sabrn4">
+          <text>((not(some event in eventlist satisfies event[1]=event1)) or ((some event in eventlist satisfies event[1]=event2) and (every x in eventlist[item[1]=event1] satisfies ((eventlist[item[1]=event1 or item[1]=event2])[(index of(eventlist[item[1]=event1 or item[1]=event2],x))[1]+1][1]=event2))=true))</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1bprq5w">
+        <inputEntry id="UnaryTests_0o442ow">
+          <text>"ChainResponse"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_094n128">
+          <text>((not(some event in eventlist satisfies event[1]=event1)) or ((some event in eventlist satisfies event[1]=event2) and (every x in eventlist[item[1]=event1] satisfies (eventlist[(index of(eventlist,x))[1]+1][1]=event2))=true))</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1tx7pux">
+        <inputEntry id="UnaryTests_02sfxev">
+          <text>"Precedence"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1nl58ij">
+          <text>((not(some event in eventlist satisfies event[1]=event2)) or ((some event in eventlist satisfies event[1]=event1) and (every x in eventlist[item[1]=event2] satisfies (after (x[2],eventlist[item[1]=event1][1][2])))=true))</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0xv9puf">
+        <inputEntry id="UnaryTests_1bm8xxj">
+          <text>"AlternatePrecedence"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_006c0pq">
+          <text>((not(some event in eventlist satisfies event[1]=event2)) or ((some event in eventlist satisfies event[1]=event1) and (every y in eventlist[item[1]=event2] satisfies ((eventlist[item[1]=event1 or item[1]=event2])[(index of(eventlist[item[1]=event1 or item[1]=event2],y))[1]-1][1]=event1))=true))</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_19prf1z">
+        <inputEntry id="UnaryTests_0ajpwjm">
+          <text>"ChainPrecedence"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1e232xd">
+          <text>((not(some event in eventlist satisfies event[1]=event2)) or ((some event in eventlist satisfies event[1]=event1) and (every y in eventlist[item[1]=event2] satisfies (eventlist[(index of(eventlist,y))[1]-1][1]=event1))=true))</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1gqew1z">
+        <inputEntry id="UnaryTests_0es37tm">
+          <text>"CoExistence"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0gw58m6">
+          <text>(((not(some event in eventlist satisfies event[1]=event1)) and (not(some event in eventlist satisfies event[1]=event2))) or ((some event in eventlist satisfies event[1]=event1) and (some event in eventlist satisfies event[1]=event2)))</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_08ruiek">
+        <inputEntry id="UnaryTests_0rrjnrc">
+          <text>"Succession"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0wtm6i4">
+          <text>(((not(some event in eventlist satisfies event[1]=event1)) and (not(some event in eventlist satisfies event[1]=event2))) or ((some event in eventlist satisfies event[1]=event1) and (some event in eventlist satisfies event[1]=event2) and (every x in eventlist[item[1]=event1] satisfies (some y in eventlist[item[1]=event2] satisfies after(y[2],x[2])))))</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_16chptz">
+        <inputEntry id="UnaryTests_01zrs8j">
+          <text>"AlternateSuccession"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_17f9993">
+          <text>(((not(some event in eventlist satisfies event[1]=event1)) and (not(some event in eventlist satisfies event[1]=event2))) or ((some event in eventlist satisfies event[1]=event1) and (some event in eventlist satisfies event[1]=event2) and ((every y in eventlist[item[1]=event2] satisfies ((eventlist[item[1]=event1 or item[1]=event2])[(index of(eventlist[item[1]=event1 or item[1]=event2],y))[1]-1][1]=event1))=true) and ((every x in eventlist[item[1]=event1] satisfies ((eventlist[item[1]=event1 or item[1]=event2])[(index of(eventlist[item[1]=event1 or item[1]=event2],x))[1]+1][1]=event2))=true)))</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1rpruzf">
+        <inputEntry id="UnaryTests_12vyu1m">
+          <text>"ChainSuccession"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1j0macx">
+          <text>(((not(some event in eventlist satisfies event[1]=event1)) and (not(some event in eventlist satisfies event[1]=event2))) or ((some event in eventlist satisfies event[1]=event1) and (some event in eventlist satisfies event[1]=event2) and ((every y in eventlist[item[1]=event2] satisfies (eventlist[(index of(eventlist,y))[1]-1][1]=event1))=true) and ((every x in eventlist[item[1]=event1] satisfies (eventlist[(index of(eventlist,x))[1]+1][1]=event2)))=true))</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0b0mowi">
+        <inputEntry id="UnaryTests_10qx8ac">
+          <text>"NotChainSuccession"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_00jucw0">
+          <text>(((not(some event in eventlist satisfies event[1]=event1)) or (not(some event in eventlist satisfies event[1]=event2))) or (not(some x in eventlist[item[1]=event1] satisfies (eventlist[(index of(eventlist,x))[1]+1][1]=event2))))</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_079uqty">
+        <inputEntry id="UnaryTests_17t6r4o">
+          <text>"NotSuccession"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0jcpo77">
+          <text>((not(some event in eventlist satisfies event[1]=event1)) or ((some event in eventlist satisfies event[1]=event1) and (not(some event in eventlist satisfies event[1]=event2)))
+or (every x in eventlist[item[1]=event1] satisfies (not(some y in eventlist[item[1]=event2] satisfies (before (x[2],y[2]))))))</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1bxjopw">
+        <inputEntry id="UnaryTests_1tlo17k">
+          <text>"NotCoExistence"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1dy6gq2">
+          <text>((not(some event in eventlist satisfies event[1]=event1)) or ((some event in eventlist satisfies event[1]=event1) and (not(some event in eventlist satisfies event[1]=event2))))</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0w8j9ea">
+        <inputEntry id="UnaryTests_1dxhbgl">
+          <text>"Choice"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0xs3568">
+          <text>(some event in eventlist satisfies event[1]=event1) or (some event in eventlist satisfies event[1]=event2)</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0kefsts">
+        <inputEntry id="UnaryTests_0rrz2y1">
+          <text>"ExclusiveChoice"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0nzphw9">
+          <text>((some event in eventlist satisfies event[1]=event1) or (some event in eventlist satisfies event[1]=event2)) and not((some event in eventlist satisfies event[1]=event1) and (some event in eventlist satisfies event[1]=event2))</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1c8d0ar">
+        <inputEntry id="UnaryTests_1mb1h3g">
+          <text>"Absence"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0xgwhob">
+          <text>(count(eventlist[item[1]=event1]) = 0) = true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ftkgha">
+        <inputEntry id="UnaryTests_0xxjghh">
+          <text>"Absence2"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_131pxrs">
+          <text>(count(eventlist[item[1]=event1]) &lt;= 1) = true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1sqlxje">
+        <inputEntry id="UnaryTests_0yd244x">
+          <text>"Absence3"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_09pe76b">
+          <text>(count(eventlist[item[1]=event1]) &lt;= 2) = true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1hloq6h">
+        <inputEntry id="UnaryTests_0wnixdd">
+          <text>"Exactly1"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1rp77dk">
+          <text>(count(eventlist[item[1]=event1]) = 1) = true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_18tldxc">
+        <inputEntry id="UnaryTests_1xqgh2z">
+          <text>"Exactly2"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_14gt3zy">
+          <text>(count(eventlist[item[1]=event1]) = 2) = true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1bgsvtf">
+        <inputEntry id="UnaryTests_1wg5vkf">
+          <text>"Existence"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_10dkz4l">
+          <text>(count(eventlist[item[1]=event1]) &gt;= 1) = true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1rymo5i">
+        <inputEntry id="UnaryTests_1vqnm9a">
+          <text>"Existence2"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0lya73e">
+          <text>(count(eventlist[item[1]=event1]) &gt;= 2) = true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_05fz1eg">
+        <inputEntry id="UnaryTests_0hn5lv9">
+          <text>"Existence3"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1o67iux">
+          <text>(count(eventlist[item[1]=event1]) &gt;= 3) = true</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="event1" name="Event1" />
+  <inputData id="event2" name="Event2" />
+  <inputData id="InputData_1eh77w5" name="Eventlist" />
+  <inputData id="InputData_15w7wno" name="Constraint Name" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="DMNShape_05xm0v2" dmnElementRef="conformanceDecision">
+        <dc:Bounds height="80" width="180" x="360" y="101" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0n8hoxo" dmnElementRef="event1">
+        <dc:Bounds height="45" width="125" x="307" y="287" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0o94fn6" dmnElementRef="event2">
+        <dc:Bounds height="45" width="125" x="457" y="287" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1ky6v69" dmnElementRef="InformationRequirement_1st6vji">
+        <di:waypoint x="370" y="287" />
+        <di:waypoint x="450" y="201" />
+        <di:waypoint x="450" y="181" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1qnn48t" dmnElementRef="InformationRequirement_124elfi">
+        <di:waypoint x="520" y="287" />
+        <di:waypoint x="495" y="201" />
+        <di:waypoint x="495" y="181" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0j356kw" dmnElementRef="InputData_1eh77w5">
+        <dc:Bounds height="45" width="125" x="708" y="118" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0sftixu" dmnElementRef="InformationRequirement_1dp0nuh">
+        <di:waypoint x="708" y="141" />
+        <di:waypoint x="560" y="141" />
+        <di:waypoint x="540" y="141" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1q64cxv" dmnElementRef="InputData_15w7wno">
+        <dc:Bounds height="45" width="125" x="157" y="287" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_02atiol" dmnElementRef="InformationRequirement_1gs3iso">
+        <di:waypoint x="220" y="287" />
+        <di:waypoint x="405" y="201" />
+        <di:waypoint x="405" y="181" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
