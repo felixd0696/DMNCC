@@ -1,9 +1,9 @@
 # DMN-CC
 This repository contains tests and examples for conformance checking with the help of DMN. The Camunda DMN Engine is used for this purpose.
 ## Structure 
-In the workspace, more precise [here](Workspace/camunda-engine-dmn-unittest-master/src/test/java/org/camunda/bpm/dmn/unittest/ConformanceTest.java), the java class is located, which needs to be run to run the programm. <br>
-Also in the workspace, more precise [here](Workspace/camunda-engine-dmn-unittest-master/src/test/resources/org/camunda/bpm/dmn/unittest/CC.dmn), the CC.dmn file is located, which has all the templates for the declarative conformance checking. <br>
-In the Event Logs folder,more precise [here](Workspace/camunda-engine-dmn-unittest-master/src/main/java/EventLogs), the example event logs used to test the different constraints are located. <br>
+In the workspace ([here](Workspace/camunda-engine-dmn-unittest-master/src/test/java/org/camunda/bpm/dmn/unittest/ConformanceTest.java)), the java class is located, which needs to be run to run the programm. <br>
+Also in the workspace ([here](Workspace/camunda-engine-dmn-unittest-master/src/test/resources/org/camunda/bpm/dmn/unittest/CC.dmn)), the CC.dmn file is located, which has all the templates for the declarative conformance checking. <br>
+In the Event Logs folder ([here](Workspace/camunda-engine-dmn-unittest-master/src/main/java/EventLogs)), the example event logs used to test the different constraints are located. <br>
 Structure of the unittest is inspired by https://github.com/camunda/camunda-engine-dmn-unittest <br>
 To be able to look at the CC.dmn file and tables, https://camunda.com/download/modeler/ is advised. <br>
 ## Usage
@@ -49,5 +49,3 @@ To be able to look at the CC.dmn file and tables, https://camunda.com/download/m
 - "Existence3,Event1" - event1 does occur at least three times
 
 To find out more about those Templates, you can also read more [here](https://research.wu.ac.at/ws/files/19829871/Rev2-20161007.pdf)
-## TODO
-- Evaluation
