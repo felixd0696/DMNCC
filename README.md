@@ -8,7 +8,7 @@ Structure of the unittest is inspired by https://github.com/camunda/camunda-engi
 To be able to look at the CC.dmn file and tables, https://camunda.com/download/modeler/ is advised. <br>
 ## Usage
 - Import the project by selecting: File / Import -> Existing Maven Project.
-- Change the [input.txt](Workspace/camunda-engine-dmn-unittest-master/src/main/java) to your needs (you can also use other files (i.e. [inputBPI.txt](Workspace/camunda-engine-dmn-unittest-master/src/main/java) as input. To do that, change Line55 of the ConformanceTest Class). 
+- Change the [input.txt](Workspace/camunda-engine-dmn-unittest-master/src/main/java) to your needs (you can also use other files (i.e. [inputBPI.txt](Workspace/camunda-engine-dmn-unittest-master/src/main/java)) as input. To do that, change Line55 of the ConformanceTest Class). 
 - To check the conformance of a specified event log for constraints specified in the [input.txt](Workspace/camunda-engine-dmn-unittest-master/src/main/java), run the ConformanceTest Java class. <br>
 ## How to change the input.txt
 - 1st line is the path to your event log. The event log needs to be a CSV file and the path needs to be with '\\' as seperators in the file path. **YOU NEED TO CHANGE THIS PATH FOR YOUR FIRST USE**
